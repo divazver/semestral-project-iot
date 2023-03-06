@@ -14,7 +14,6 @@
     "format": "prettier --write './**/*.{js,md,json}' --config ./.prettierrc"
   },
   "dependencies": {
-    "@sendgrid/mail": "^7.7.0",
     "axios": "^0.27.2",
     "cookie-session": "^2.0.0",
     "cors": "^2.8.5",
@@ -30,10 +29,7 @@
     "match-url-wildcard": "^0.0.4",
     "mongodb": "^4.8.0",
     "mongoose": "^6.4.7",
-    "mongoose-paginate-v2": "^1.7.0",
     "morgan": "^1.10.0",
-    "passport": "^0.6.0",
-    "passport-google-oauth2": "^0.2.0",
     "pino": "^8.3.0",
     "pino-pretty": "^8.1.0",
     "swagger-jsdoc": "^6.2.1",

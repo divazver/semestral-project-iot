@@ -46,9 +46,14 @@ const checkJwt = (value) => {
       } else if (value) {
         // Check JWT custom value
         let response = null;
+        let ownerUserId = null;
+
+        if (value === AUTH_MODE.isOwnerOrAdmin) {
+          ownerUserId = req.params.userId;
+        }
 
         // eslint-disable-next-line no-use-before-define
-        response = await trySwitch(value, decoded);
+        response = await trySwitch(value, decoded, ownerUserId);
 
         if (response === 'admin') {
           req.isAdmin = true;
@@ -76,6 +81,9 @@ const trySwitch = async (value, decoded, ownerUserId) => {
     case AUTH_MODE.isAdmin:
       // eslint-disable-next-line no-use-before-define
       return await checkIsAdmin(decoded);
+    case AUTH_MODE.isOwnerOrAdmin:
+      // eslint-disable-next-line no-use-before-define
+      return await checkIsOwnerOrAdmin(decoded, ownerUserId);
     default:
       logger.error(`Sorry, you are out of ${value}.`);
       throw new NotAuthorizedError();
@@ -95,6 +103,25 @@ const checkIsAdmin = async (decoded) => {
     return true;
   } catch (error) {
     logger.error(`Error checkIsAdmin: ${error}.`);
+    throw new NotAuthorizedError();
+  }
+};
+
+/**
+ * The user can only work with their own resources and admin can do everything
+ * @param {Object} decode
+ * @param {String} ownerUserId
+ * @returns Boolean || String
+ */
+const checkIsOwnerOrAdmin = async (decoded, ownerUserId) => {
+  try {
+    const role = await getRole(decoded.role, undefined);
+
+    if (role.name === ROLE.admin) return 'admin';
+    else if (ownerUserId && decoded.id === ownerUserId) return true;
+    else return false;
+  } catch (error) {
+    logger.error(`Error checkIsOwnerOrAdmin: ${error}.`);
     throw new NotAuthorizedError();
   }
 };

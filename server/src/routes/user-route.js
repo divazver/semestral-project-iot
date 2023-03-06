@@ -7,7 +7,7 @@ const { body, param, query, matchedData } = require('express-validator');
 const { validateRequest } = require('../middleware/validate-request');
 const { checkJwt } = require('../middleware/authentication');
 
-const { GENDER, LANGUAGE, ROLE } = require('../utils/constants');
+const { ROLE } = require('../utils/constants');
 const { isEmptyObject, isValidMongoId } = require('../utils/helpers');
 const { BadRequestError } = require('../utils/errors');
 
@@ -28,13 +28,6 @@ router.post(
   body('firstName').not().isEmpty().trim().escape().isLength({ min: 3, max: 255 }),
   body('lastName').not().isEmpty().trim().escape().isLength({ min: 3, max: 255 }),
   body('password').not().isEmpty().isString().trim().escape().isLength({ min: 4 }),
-  body('studyProgramId')
-    .not()
-    .isEmpty()
-    .isString()
-    .trim()
-    .escape()
-    .custom((value) => isValidMongoId(value)),
   validateRequest,
   async (req, res, next) => {
     try {
@@ -58,12 +51,6 @@ router.post(
   body('lastName').isString().trim().escape().isLength({ min: 4, max: 255 }),
   body('email').not().isEmpty().trim().escape().isEmail(),
   body('password').not().isEmpty().isString().trim().escape().isLength({ min: 4 }),
-  body('studyProgramId')
-    .isString()
-    .trim()
-    .escape()
-    .optional({ nullable: true })
-    .custom((value) => isValidMongoId(value)),
   body('roleId')
     .not()
     .isEmpty()
@@ -177,12 +164,6 @@ router.patch(
   body('lastName').isString().trim().escape().isLength({ min: 4, max: 255 }).optional({ nullable: true }),
   body('email').trim().escape().isEmail().optional({ nullable: true }),
   body('password').isString().trim().escape().isLength({ min: 4 }).optional({ nullable: true }),
-  body('studyProgramId')
-    .isString()
-    .trim()
-    .escape()
-    .optional({ nullable: true })
-    .custom((value) => isValidMongoId(value)),
   body('roleId')
     .isString()
     .trim()
