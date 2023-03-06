@@ -58,8 +58,10 @@ const checkJwt = (value) => {
         if (response === 'admin') {
           req.isAdmin = true;
           next();
-        } else if (response) next();
-        else throw new NotAuthorizedError();
+        } else if (response) {
+          req.userId = decoded.id;
+          next();
+        } else throw new NotAuthorizedError();
       } else {
         req.token = token;
         next();

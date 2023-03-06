@@ -113,6 +113,7 @@ module.exports = {
   hexColorChecker,
   isEmptyObject,
   isValidMongoId,
+  randomStringGenerator,
   removeAliases,
   stringIsAValidUrl,
 };

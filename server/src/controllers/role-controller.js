@@ -24,7 +24,9 @@ const getRole = async (id = undefined, name = undefined) => {
  * @returns {Array[Object]} Roles
  */
 const getRoles = async () => {
-  const roles = await Role.find().lean();
+  const roles = await Role.find()
+    .populate([{ path: 'users', select: { firstName: 1, lastName: 1, email: 1 } }])
+    .lean();
 
   if (roles?.length <= 0) throw new NoContentError('No roles');
   return roles;

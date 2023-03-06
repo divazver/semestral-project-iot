@@ -37,7 +37,8 @@ const connectDb = async () => {
 
         // Run seeds DB with Dummy data only if DB is empty
         // in other way use seeder endpoint
-        if (collections.length < 7) createDummyData();
+        //! Not GOOD not to BAD
+        if (collections.length < 4) createDummyData();
 
         return response;
       })
