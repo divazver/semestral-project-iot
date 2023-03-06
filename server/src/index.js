@@ -29,7 +29,7 @@ const swaggerOptions = {
   swaggerDefinition: {
     openapi: '3.0.1',
     info: {
-      title: 'uuSubjectMan',
+      title: 'uuWetApp',
       description: 'Semestral project',
       servers: [`${env.get('ORIGIN_CLIENT').required().asString()}:${env.get('PORT').required().asString()}`],
     },

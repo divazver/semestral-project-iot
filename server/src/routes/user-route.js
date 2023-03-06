@@ -27,9 +27,6 @@ router.post(
   body('email').not().isEmpty().trim().escape().isEmail(),
   body('firstName').not().isEmpty().trim().escape().isLength({ min: 3, max: 255 }),
   body('lastName').not().isEmpty().trim().escape().isLength({ min: 3, max: 255 }),
-  body('gender').not().isEmpty().isString().trim().escape().isIn([GENDER.male, GENDER.female]),
-  body('dateOfBirth').not().isEmpty().isDate().escape(),
-  body('studyLanguage').not().isEmpty().isString().trim().escape().isIn([LANGUAGE.czech, LANGUAGE.english]),
   body('password').not().isEmpty().isString().trim().escape().isLength({ min: 4 }),
   body('studyProgramId')
     .not()
@@ -60,15 +57,7 @@ router.post(
   body('firstName').isString().trim().escape().isLength({ min: 4, max: 255 }),
   body('lastName').isString().trim().escape().isLength({ min: 4, max: 255 }),
   body('email').not().isEmpty().trim().escape().isEmail(),
-  body('gender').not().isEmpty().isString().trim().escape().isIn([GENDER.male, GENDER.female]),
-  body('dateOfBirth').isDate().escape().optional({ nullable: true }),
   body('password').not().isEmpty().isString().trim().escape().isLength({ min: 4 }),
-  body('studyLanguage')
-    .isString()
-    .trim()
-    .escape()
-    .isIn([LANGUAGE.english, LANGUAGE.czech])
-    .optional({ nullable: true }),
   body('studyProgramId')
     .isString()
     .trim()
@@ -187,17 +176,7 @@ router.patch(
   body('firstName').isString().trim().escape().isLength({ min: 4, max: 255 }).optional({ nullable: true }),
   body('lastName').isString().trim().escape().isLength({ min: 4, max: 255 }).optional({ nullable: true }),
   body('email').trim().escape().isEmail().optional({ nullable: true }),
-  body('gender').isString().trim().escape().isIn([GENDER.male, GENDER.female]).optional({ nullable: true }),
-  body('dateOfBirth').isDate().escape().optional({ nullable: true }),
   body('password').isString().trim().escape().isLength({ min: 4 }).optional({ nullable: true }),
-  body('studyLanguage')
-    .not()
-    .isEmpty()
-    .isString()
-    .trim()
-    .escape()
-    .isIn([LANGUAGE.english, LANGUAGE.czech])
-    .optional({ nullable: true }),
   body('studyProgramId')
     .isString()
     .trim()
