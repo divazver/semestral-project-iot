@@ -37,7 +37,8 @@ Version of node - `16.xx.xx`
   ```
   {
 	"host": "localhost:4000",
-	"jwtToken": "<COPY&PAST token from /login here>"
+	"jwtToken": "<COPY&PAST token from /login here>",
+  "gatewayToken": "<COPY&PAST token from gateway here>"
   }
   ```
 
@@ -53,4 +54,4 @@ Version of node - `16.xx.xx`
 
 ## Copyright
 
-&copy; The best from uu
+&copy; The best team ever 

@@ -117,10 +117,18 @@ const deleteGateway = async (gatewayId) => {
   } else return false;
 };
 
+const _checkGatewayToken = async (token) => {
+  const gateway = await Gateway.findOne({ token }).lean();
+  if (!gateway) return false;
+
+  return gateway;
+};
+
 module.exports = {
   createGateway,
   getGateway,
   allGateways,
   updateGateway,
   deleteGateway,
+  _checkGatewayToken,
 };
