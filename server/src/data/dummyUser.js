@@ -25,7 +25,7 @@ const DUMMY_USER = [
     email: 'simpleuser@gmail.com',
     encrypt_password:
       'd8f5dbfbddf057119587f8f8b38875c030e2e49df1749e4b40e62dcf87c177e2263d31f6612acb60712cd2675f014edad0be075211639bcd24d581795a059f26',
-    roleId: DUMMY_ROLE[2],
+    roleId: DUMMY_ROLE[1],
     salt: '02ba3ee1-52c0-4993-845c-606f7c4de92e',
     createdAt: new Date(),
     updatedAt: new Date(),
@@ -37,7 +37,7 @@ const DUMMY_USER = [
     email: 'simpleuser2@gmail.com',
     encrypt_password:
       'd8f5dbfbddf057119587f8f8b38875c030e2e49df1749e4b40e62dcf87c177e2263d31f6612acb60712cd2675f014edad0be075211639bcd24d581795a059f26',
-    roleId: DUMMY_ROLE[2],
+    roleId: DUMMY_ROLE[1],
     salt: '02ba3ee1-52c0-4993-845c-606f7c4de92e',
     createdAt: new Date(),
     updatedAt: new Date(),
