@@ -131,12 +131,7 @@ router.get('/current-user', checkJwt(), async (req, res, next) => {
 router.get(
   '/users',
   checkJwt('isAdmin'),
-  query('role')
-    .isString()
-    .trim()
-    .escape()
-    .optional({ nullable: true })
-    .isIn([ROLE.admin, ROLE.supervisor, ROLE.user, ROLE.waiting]),
+  query('role').isString().trim().escape().optional({ nullable: true }).isIn([ROLE.admin, ROLE.user]),
   validateRequest,
   async (req, res, next) => {
     try {
@@ -170,12 +165,7 @@ router.patch(
     .escape()
     .optional({ nullable: true })
     .custom((value) => isValidMongoId(value)),
-  body('roleName')
-    .isString()
-    .trim()
-    .escape()
-    .optional({ nullable: true })
-    .isIn([ROLE.admin, ROLE.supervisor, ROLE.user, ROLE.waiting]),
+  body('roleName').isString().trim().escape().optional({ nullable: true }).isIn([ROLE.admin, ROLE.user]),
   validateRequest,
   async (req, res, next) => {
     try {

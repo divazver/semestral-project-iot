@@ -24,7 +24,7 @@ const registerUser = async (data) => {
     throw new ConflictError('User exists');
   }
 
-  const role = await getRole(undefined, ROLE.waiting);
+  const role = await getRole(undefined, ROLE.user);
   data.roleId = role._id;
 
   const user = new User(data);
