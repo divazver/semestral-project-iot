@@ -12,7 +12,7 @@ import SignUp from "./routes/Signup";
 import AuthRoute from "./routes/AuthRoute";
 import Dashboard from "./routes/Dashboard";
 import {useAuth} from "./utils/hooks/useAuth";
-import Page from "./Components/Page/Page";
+import Page from "./components/Page/Page";
 
 const routesMap = [
   {

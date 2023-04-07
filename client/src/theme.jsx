@@ -10,14 +10,19 @@ export default createTheme({
       contrastText: '#fff',
     },
     secondary: {
-      main: '#EB9929',
+      main: '#f4e04d',
+      contrastText: '#fff',
+    },
+    secondaryGreen: {
+      main: '#476a6f',
       contrastText: '#fff',
     },
     grey: {
-      800: '#50514F',
+      //800: '#50514F',
+      900: '#06070e',
     },
     text: {
-      primary: '#50514F',
+      primary: '#06070e',
       secondary: '#9BAEBC',
     },
     background: {

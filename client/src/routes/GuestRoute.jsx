@@ -53,7 +53,7 @@ const GuestRoute = () => {
           left: '0',
           right: '0',
           bottom: '0',
-          backgroundImage: 'linear-gradient(to bottom, rgba(255,0,0,0) , rgb(80, 81, 79) 95%)',
+          backgroundImage: 'linear-gradient(to bottom, rgba(255,0,0,0) , rgb(71, 106, 111) 100%)',
         }}/>
         <Box sx={{
           position: 'relative',
