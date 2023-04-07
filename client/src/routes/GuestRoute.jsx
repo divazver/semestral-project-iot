@@ -1,16 +1,21 @@
-import React from "react";
-import {Outlet, Navigate} from "react-router-dom";
+import React, {useEffect} from "react";
+import {Outlet, Navigate, useLocation} from "react-router-dom";
 
 import {useAuth} from 'utils/hooks/useAuth';
 import {Box, Grid, Typography} from "@mui/material";
 import promoImage from "../resources/img/promo-image.jpg";
 import logo from "../resources/img/logo-white.png";
+import useDocumentTitle from "../utils/hooks/useDocumentTitle";
 
 const GuestRoute = () => {
   const slogan = "Statistics about";
   const sloganSecondLine = "weather in your city.";
+  const [pageTitle, setPageTitle] = useDocumentTitle('');
+  const location = useLocation();
 
   const {user} = useAuth();
+
+  useEffect(() => () => setPageTitle(''), [location]);
 
   if (user) {
     return <Navigate to={"/dashboard"}/>;
@@ -99,7 +104,7 @@ const GuestRoute = () => {
             }}
       >
         <Grid item xs={12} sm={10} md={7} lg={6} xl={5}>
-          <Outlet/>
+          <Outlet context={[pageTitle, setPageTitle]}/>
         </Grid>
       </Grid>
     </Grid>

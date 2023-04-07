@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import {useNavigate} from 'react-router-dom';
+import React, {useEffect, useState} from "react";
+import {useNavigate, useOutletContext} from 'react-router-dom';
 import {Typography, Divider, TextField, Button, Alert} from '@mui/material';
 import {useAuth} from "../utils/hooks/useAuth";
 import {isEmptyValue, isValidEmail} from "../utils/utils";
@@ -8,6 +8,7 @@ const Login = () => {
   const [{email, password}, setCredentials] = useState({email: "", password: ""});
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
+  const [, setPageTitle] = useOutletContext();
 
   const {login} = useAuth();
   const navigate = useNavigate();
@@ -69,10 +70,12 @@ const Login = () => {
     }
   }
 
+  useEffect(() => setPageTitle('Account'), []);
+
   return <>
     {hasError("global") && <Alert severity="error" sx={{mb: 5}}>{getError("global")}</Alert>}
     <Typography variant={'h5'}>{`WetApp Account`}</Typography>
-    <Typography variant={'body1'} sx={{pb: 2}}>{`SignIn and explore past data about wheater.`}</Typography>
+    <Typography variant={'body1'} sx={{pb: 2}}>{`SignIn and explore past data about weather.`}</Typography>
 
     <form noValidate onSubmit={handleSubmit}>
       <TextField

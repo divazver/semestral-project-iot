@@ -1,10 +1,9 @@
-import React, {useState} from "react";
-import {useNavigate} from 'react-router-dom';
+import React, {useEffect, useState} from "react";
+import {useOutletContext} from 'react-router-dom';
 import {Alert, Typography} from "@mui/material";
 import SignUpForm from "../Components/SignUpForm/SignUpForm";
 import {registerUser} from "../api/user/user";
 import {useValidation} from "../utils/hooks/useValidation";
-import {setTokenCookies} from "../utils/auth";
 import {useAuth} from "../utils/hooks/useAuth";
 
 const SignUp = () => {
@@ -12,7 +11,7 @@ const SignUp = () => {
   const [loading, setLoading] = useState();
   const {setErrors, hasError, setError, getError} = useValidation();
   const {authByToken} = useAuth();
-  const navigate = useNavigate();
+  const [, setPageTitle] = useOutletContext();
 
   const handleSubmit = (user) => {
     registerUser(user)
@@ -35,6 +34,8 @@ const SignUp = () => {
       })
       .finally(() => setLoading(false))
   }
+
+  useEffect(() => setPageTitle('Sign up'), [])
 
   return <>
     {hasError("global") && <Alert severity="error" sx={{mb: 5}}>{getError("global")}</Alert>}
