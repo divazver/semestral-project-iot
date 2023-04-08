@@ -17,48 +17,49 @@ import {
   Container,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import AddIcon from '@mui/icons-material/Add';
 
 import logo from 'resources/img/logo.png';
-import { useAuth } from 'utils/hooks/useAuth';
+import {useAuth} from 'utils/hooks/useAuth';
 import LoggedUserInfo from '../LoggedUserInfo/LoggedUserInfo';
 
-const Navbar = ({ navItems }) => {
+const Navbar = ({navItems}) => {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const navigate = useNavigate();
-  const { authenticated, user } = useAuth();
+  const {authenticated, user, isAdmin} = useAuth();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
 
   const drawer = (
-    <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
+    <Box onClick={handleDrawerToggle} sx={{textAlign: 'center'}}>
       <Box
         sx={{
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          flexGrow: { xs: 1, sm: 0 },
+          flexGrow: {xs: 1, sm: 0},
           height: 56,
         }}>
         <img
           src={logo}
           alt="WetApp!"
           style={{
-            maxWidth: 165,
+            maxWidth: 125,
             cursor: 'pointer',
           }}
           onClick={() => navigate('/')}
         />
       </Box>
 
-      <Divider />
+      <Divider/>
 
       <List>
-        {navItems.map(({ name, path }) => (
+        {navItems.map(({name, path}) => (
           <ListItem key={name} disablePadding>
-            <ListItemButton sx={{ textAlign: 'center' }} onClick={() => navigate(path)}>
-              <ListItemText primary={name} />
+            <ListItemButton sx={{textAlign: 'center'}} onClick={() => navigate(path)}>
+              <ListItemText primary={name}/>
             </ListItemButton>
           </ListItem>
         ))}
@@ -67,8 +68,8 @@ const Navbar = ({ navItems }) => {
   );
 
   return (
-    <Box sx={{ display: 'flex' }}>
-      <AppBar component="nav" position="relative" sx={{ boxShadow: 0, borderBottom: 1, borderColor: 'grey.200' }}>
+    <Box sx={{display: 'flex'}}>
+      <AppBar component="nav" position="relative" sx={{boxShadow: 0, borderBottom: 1, borderColor: 'grey.200'}}>
         <Container>
           <Toolbar disableGutters={true}>
             <IconButton
@@ -76,11 +77,11 @@ const Navbar = ({ navItems }) => {
               aria-label="open drawer"
               edge="start"
               onClick={handleDrawerToggle}
-              sx={{ display: { sm: 'none' }, ml: 1, mr: 2 }}>
-              <MenuIcon />
+              sx={{display: {sm: 'none'}, ml: 1, mr: 2}}>
+              <MenuIcon/>
             </IconButton>
 
-            <Box sx={{ display: 'flex', flexGrow: { xs: 1, sm: 0 } }}>
+            <Box sx={{display: 'flex', flexGrow: {xs: 1, sm: 0}}}>
               <img
                 src={logo}
                 alt="WetApp!"
@@ -92,14 +93,14 @@ const Navbar = ({ navItems }) => {
               />
             </Box>
 
-            <Box sx={{ flexGrow: 1, pl: 3, display: { xs: 'none', sm: 'block' } }}>
-              {navItems.map(({ name, path, logged }) => {
+            <Box sx={{flexGrow: 1, pl: 3, display: {xs: 'none', sm: 'block'}}}>
+              {navItems.map(({name, path, logged}) => {
                 if (user) {
                   return (
                     <Link
                       key={name}
                       color={'text.primary'}
-                      sx={{ cursor: 'pointer', ml: 2, fontWeight: 2, typography: 'subtitle2' }}
+                      sx={{cursor: 'pointer', ml: 2, fontWeight: 2, typography: 'subtitle2'}}
                       onClick={() => navigate(path)}
                       underline={'none'}>
                       {name}
@@ -110,7 +111,7 @@ const Navbar = ({ navItems }) => {
                     <Link
                       key={name}
                       color={'text.primary'}
-                      sx={{ cursor: 'pointer', ml: 2, fontWeight: 2, typography: 'subtitle2' }}
+                      sx={{cursor: 'pointer', ml: 2, fontWeight: 2, typography: 'subtitle2'}}
                       onClick={() => navigate(path)}
                       underline={'none'}>
                       {name}
@@ -121,19 +122,17 @@ const Navbar = ({ navItems }) => {
             </Box>
 
             {authenticated ? (
-              <Box>
-                <LoggedUserInfo user={user} />
+              <Box sx={{
+                display: 'flex',
+                alignItems: 'center',
+              }}>
+                {isAdmin &&
+                <Button variant={'contained'} color={'primary'} onClick={() => navigate('/gateway/add')} sx={{mr: 5}}>
+                  <AddIcon/> Add Gateway
+                </Button>}
+                <LoggedUserInfo user={user}/>
               </Box>
-            ) : (
-              <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-                <Button variant="text" color={'inherit'} sx={{ mr: 1 }} onClick={() => navigate('/login')}>
-                  Sign in
-                </Button>
-                <Button variant={'contained'} color={'secondary'} onClick={() => navigate('/signup')}>
-                  Sign up
-                </Button>
-              </Box>
-            )}
+            ) : ""}
           </Toolbar>
         </Container>
       </AppBar>
@@ -148,8 +147,8 @@ const Navbar = ({ navItems }) => {
             keepMounted: true, // Better open performance on mobile.
           }}
           sx={{
-            display: { xs: 'block', sm: 'none' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: 240 },
+            display: {xs: 'block', sm: 'none'},
+            '& .MuiDrawer-paper': {boxSizing: 'border-box', width: 240},
           }}>
           {drawer}
         </Drawer>

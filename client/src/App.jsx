@@ -13,6 +13,7 @@ import AuthRoute from "./routes/AuthRoute";
 import Dashboard from "./routes/Dashboard";
 import {useAuth} from "./utils/hooks/useAuth";
 import Page from "./components/Page/Page";
+import NotFound from "./routes/NotFound";
 
 const routesMap = [
   {
@@ -51,6 +52,12 @@ const routesMap = [
         ],
       },
     ],
+  },
+  {
+    title: 'Not Found',
+    key: 'not-found',
+    path: '*',
+    element: <NotFound />,
   },
 ]
 
