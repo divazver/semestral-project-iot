@@ -8,6 +8,7 @@ import {AuthProvider} from "./utils/hooks/useAuth";
 
 import theme from 'theme';
 import {ValidationProvider} from "./utils/hooks/useValidation";
+import {AppContextProvider} from "./utils/hooks/useAppState";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -16,7 +17,9 @@ root.render(
       <ValidationProvider>
         <AuthProvider>
           <ThemeProvider theme={theme}>
-          <App/>
+            <AppContextProvider>
+              <App/>
+            </AppContextProvider>
           </ThemeProvider>
         </AuthProvider>
       </ValidationProvider>

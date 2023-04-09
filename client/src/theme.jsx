@@ -21,6 +21,9 @@ export default createTheme({
       //800: '#50514F',
       900: '#06070e',
     },
+    greyLight: {
+      main: '#757575',
+    },
     text: {
       primary: '#06070e',
       secondary: '#9BAEBC',
@@ -34,7 +37,7 @@ export default createTheme({
       styleOverrides: {
         colorPrimary: {
           backgroundColor: '#fff',
-          color: '#374955',
+          color: '#06070e',
         },
       },
     },

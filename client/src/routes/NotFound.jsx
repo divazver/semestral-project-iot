@@ -29,9 +29,9 @@ const NotFound = () => {
       }}/>
       <LinkOffIcon sx={{fontSize: 120, mt: 15, mb: 2}} />
       <Typography variant={'h3'} sx={{mb: 2}}>The page has been not found!</Typography>
-      <Typography variant={'body'}>The requested page has been not found. Please check the url or return to the application.</Typography>
+      <Typography variant={'body'}>The requested page has been not found. Please check the url or return back to the application.</Typography>
       <Button variant={'contained'} color={'primary'} onClick={() => navigate('/')} sx={{mt: 5}}>
-        Return to application
+        Return back to the application
       </Button>
     </Box>
     <Box sx={{ mt: 20 }}>
