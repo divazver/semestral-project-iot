@@ -2,7 +2,7 @@
 
 const express = require('express');
 const router = express.Router();
-const { body, param, matchedData } = require('express-validator');
+const { body, param, matchedData, query } = require('express-validator');
 
 const { validateRequest } = require('../middleware/validate-request');
 const { checkJwt } = require('../middleware/authentication');
@@ -49,12 +49,15 @@ router.get(
     .trim()
     .escape()
     .custom((value) => isValidMongoId(value)),
+  query('dateTo').isString().trim().optional({ nullable: true }),
+  query('dateFrom').isString().trim().optional({ nullable: true }),
   validateRequest,
   async (req, res, next) => {
     try {
       const { gatewayId } = req.params;
+      const { dateTo, dateFrom } = req.query;
 
-      const response = await getGateway(gatewayId);
+      const response = await getGateway(gatewayId, dateTo, dateFrom);
 
       res.status(200).send(response);
     } catch (error) {
