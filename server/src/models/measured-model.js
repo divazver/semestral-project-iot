@@ -26,7 +26,7 @@ const measuredSchema = new mongoose.Schema(
   },
   {
     timeseries: {
-      timeField: 'timestamp',
+      timeField: 'time',
       metaField: 'gatewayId',
       granularity: 'minutes',
     },

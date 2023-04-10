@@ -14,7 +14,7 @@ const checkGatewayToken = (value) => {
   return async (req, res, next) => {
     try {
       // Take token from http request
-      const token = req.headers.authorization;
+      const token = `Bearer ${req.headers.authorization}`;
       if (!token) throw new NotAuthorizedError();
 
       const getGateway = await _checkGatewayToken(token);

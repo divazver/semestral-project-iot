@@ -48,6 +48,7 @@ router.get(
     .custom((value) => isValidMongoId(value)),
   query('dateTo').isString().trim().optional({ nullable: true }),
   query('dateFrom').isString().trim().optional({ nullable: true }),
+  query('granularity').isNumeric().trim().optional({ nullable: true }),
   validateRequest,
   async (req, res, next) => {
     try {
