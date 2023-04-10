@@ -1,0 +1,1288 @@
+[
+    {
+        "id": "e216599421c76428",
+        "type": "tab",
+        "label": "WetApp Gateway",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "8d80ce8fd2475b74",
+        "type": "subflow",
+        "name": "Compaction",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 40,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "05173701cc40802c"
+                    }
+                ]
+            }
+        ],
+        "out": [],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "cf6f4e9a33cc6bc5",
+        "type": "subflow",
+        "name": "DashboardPendingCount",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 60,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "2886bfb17282668e"
+                    }
+                ]
+            }
+        ],
+        "out": [],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "c2e0a236ce111a55",
+        "type": "subflow",
+        "name": "CloudUpload",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 40,
+                "y": 140,
+                "wires": [
+                    {
+                        "id": "e32848d4ac889236"
+                    }
+                ]
+            }
+        ],
+        "out": [],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "e64f57bdbc832886",
+        "type": "subflow",
+        "name": "DashboardData",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 60,
+                "y": 140,
+                "wires": [
+                    {
+                        "id": "4e76454e600fa53b"
+                    }
+                ]
+            }
+        ],
+        "out": [],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "11979371e3869fb6",
+        "type": "serial-port",
+        "serialport": "/dev/tty.usbmodem2112401",
+        "serialbaud": "9600",
+        "databits": "8",
+        "parity": "none",
+        "stopbits": "1",
+        "waitfor": "",
+        "dtr": "none",
+        "rts": "none",
+        "cts": "none",
+        "dsr": "none",
+        "newline": "\\n",
+        "bin": "false",
+        "out": "char",
+        "addchar": "",
+        "responsetimeout": "10000"
+    },
+    {
+        "id": "731d2d1581b38eb1",
+        "type": "redis-config",
+        "name": "Local",
+        "options": "{}",
+        "cluster": false,
+        "optionsType": "json"
+    },
+    {
+        "id": "d82f53b7eb2c0526",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-light",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#0094CE",
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#fafafa",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#1bbfff",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#0094ce",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "Node-RED Dashboard",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "e88cd378b62a20a5",
+        "type": "ui_tab",
+        "name": "Dashboard",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "5882aa85429c3ed3",
+        "type": "ui_group",
+        "name": "Current",
+        "tab": "e88cd378b62a20a5",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "4a79c40c206e3592",
+        "type": "ui_group",
+        "name": "History",
+        "tab": "e88cd378b62a20a5",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "ce44d2dbdc2dadd2",
+        "type": "ui_group",
+        "name": "Cloud",
+        "tab": "e88cd378b62a20a5",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "05173701cc40802c",
+        "type": "redis-command",
+        "z": "8d80ce8fd2475b74",
+        "server": "731d2d1581b38eb1",
+        "command": "TS.INFO",
+        "name": "Redis Topic Info",
+        "topic": "",
+        "params": "[]",
+        "paramsType": "json",
+        "payloadType": "json",
+        "block": false,
+        "x": 160,
+        "y": 80,
+        "wires": [
+            [
+                "8f400f3da0d56c76"
+            ]
+        ]
+    },
+    {
+        "id": "7feb84f2b785fbee",
+        "type": "switch",
+        "z": "8d80ce8fd2475b74",
+        "name": "If no Rules",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nnull"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 490,
+        "y": 80,
+        "wires": [
+            [
+                "839f0c72d248c2c9"
+            ]
+        ]
+    },
+    {
+        "id": "8f400f3da0d56c76",
+        "type": "function",
+        "z": "8d80ce8fd2475b74",
+        "name": "Check Rules",
+        "func": "const tsInfo = msg.payload;\nconst topic = msg.topic;\n\nconst ruleIndex = tsInfo.indexOf('rules');\nif (tsInfo[ruleIndex + 1].length === 0) {\n    msg.originalTopic = topic;\n    msg.rulePayload = [`${topic}_compacted`, \"AGGREGATION\", \"avg\", \"300000\"];\n    msg.topic = `${topic}_compacted`;\n    msg.payload = \"\"\n} else {\n    msg.topic = null;\n    msg.payload = null;\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 80,
+        "wires": [
+            [
+                "7feb84f2b785fbee"
+            ]
+        ]
+    },
+    {
+        "id": "abf71d7f4a967676",
+        "type": "redis-command",
+        "z": "8d80ce8fd2475b74",
+        "server": "731d2d1581b38eb1",
+        "command": "TS.CREATE",
+        "name": "Create Compacted Topic",
+        "topic": "",
+        "params": "[\"RETENTION\",1209600000]",
+        "paramsType": "json",
+        "payloadType": "json",
+        "block": false,
+        "x": 1110,
+        "y": 40,
+        "wires": [
+            [
+                "4588e4a7987fd693"
+            ]
+        ]
+    },
+    {
+        "id": "839f0c72d248c2c9",
+        "type": "redis-command",
+        "z": "8d80ce8fd2475b74",
+        "server": "731d2d1581b38eb1",
+        "command": "EXISTS",
+        "name": "Compacted topic exists?",
+        "topic": "",
+        "params": "[]",
+        "paramsType": "json",
+        "payloadType": "json",
+        "block": false,
+        "x": 690,
+        "y": 80,
+        "wires": [
+            [
+                "9f9686c24309bebc"
+            ]
+        ]
+    },
+    {
+        "id": "9f9686c24309bebc",
+        "type": "switch",
+        "z": "8d80ce8fd2475b74",
+        "name": "No/Yes",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 880,
+        "y": 80,
+        "wires": [
+            [
+                "abf71d7f4a967676"
+            ],
+            [
+                "4588e4a7987fd693"
+            ]
+        ]
+    },
+    {
+        "id": "d60e966ec8b56fea",
+        "type": "redis-command",
+        "z": "8d80ce8fd2475b74",
+        "server": "731d2d1581b38eb1",
+        "command": "TS.CREATERULE",
+        "name": "Create Compaction Rule",
+        "topic": "",
+        "params": "[]",
+        "paramsType": "json",
+        "payloadType": "json",
+        "block": false,
+        "x": 1390,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4588e4a7987fd693",
+        "type": "change",
+        "z": "8d80ce8fd2475b74",
+        "name": "Payload for Compaction Rule",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "rulePayload",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "originalTopic",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1130,
+        "y": 100,
+        "wires": [
+            [
+                "d60e966ec8b56fea"
+            ]
+        ]
+    },
+    {
+        "id": "d8f61987f124f034",
+        "type": "switch",
+        "z": "cf6f4e9a33cc6bc5",
+        "name": "",
+        "property": "sensor",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "temperature",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "humidity",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 490,
+        "y": 80,
+        "wires": [
+            [
+                "094319281b343662"
+            ],
+            [
+                "c7520cbccca4dcd0"
+            ]
+        ]
+    },
+    {
+        "id": "094319281b343662",
+        "type": "ui_gauge",
+        "z": "cf6f4e9a33cc6bc5",
+        "name": "TemperatureNotUploaded",
+        "group": "ce44d2dbdc2dadd2",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Temperature Measurements not uploaded",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": 10,
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "1",
+        "seg2": "5",
+        "diff": false,
+        "className": "",
+        "x": 690,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "a8006c932696c3f8",
+        "type": "function",
+        "z": "cf6f4e9a33cc6bc5",
+        "name": "Parse",
+        "func": "const tsInfo = msg.payload;\n\nconst idx = tsInfo.indexOf('totalSamples');\nmsg.payload = tsInfo[idx+1];\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 80,
+        "wires": [
+            [
+                "d8f61987f124f034"
+            ]
+        ]
+    },
+    {
+        "id": "c7520cbccca4dcd0",
+        "type": "ui_gauge",
+        "z": "cf6f4e9a33cc6bc5",
+        "name": "HumidityNotUploaded",
+        "group": "ce44d2dbdc2dadd2",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Humidity Measurements not uploaded",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": 10,
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "1",
+        "seg2": "5",
+        "diff": false,
+        "className": "",
+        "x": 680,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "2886bfb17282668e",
+        "type": "redis-command",
+        "z": "cf6f4e9a33cc6bc5",
+        "server": "731d2d1581b38eb1",
+        "command": "TS.INFO",
+        "name": "",
+        "topic": "",
+        "params": "[]",
+        "paramsType": "json",
+        "payloadType": "json",
+        "block": false,
+        "x": 220,
+        "y": 80,
+        "wires": [
+            [
+                "a8006c932696c3f8"
+            ]
+        ]
+    },
+    {
+        "id": "e32848d4ac889236",
+        "type": "redis-command",
+        "z": "c2e0a236ce111a55",
+        "server": "731d2d1581b38eb1",
+        "command": "TS.GET",
+        "name": "",
+        "topic": "",
+        "params": "[]",
+        "paramsType": "json",
+        "payloadType": "json",
+        "block": false,
+        "x": 190,
+        "y": 140,
+        "wires": [
+            [
+                "d2ed517f2f4a3c74"
+            ]
+        ]
+    },
+    {
+        "id": "d2ed517f2f4a3c74",
+        "type": "join",
+        "z": "c2e0a236ce111a55",
+        "name": "",
+        "mode": "custom",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "sensor",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": false,
+        "timeout": "",
+        "count": "2",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "num",
+        "reduceFixup": "",
+        "x": 330,
+        "y": 140,
+        "wires": [
+            [
+                "18451dc989227976"
+            ]
+        ]
+    },
+    {
+        "id": "18451dc989227976",
+        "type": "function",
+        "z": "c2e0a236ce111a55",
+        "name": "Prepare Data",
+        "func": "const payload = msg.payload;\n\nlet timestamp = 0;\nfor (let key of Object.keys(payload)) {\n    const [ts, val] = payload[key];\n    if (timestamp === 0) {\n        timestamp = ts;\n    } else if (timestamp !== ts) {\n        return;\n        \n    }\n    msg.payload[key] = parseFloat(val);\n}\nif (!timestamp) {\n    return;\n}\n\nmsg.timestamp = timestamp;\nmsg.payload.time = timestamp.toString();\n\nvar d = new Date();\nmsg.cloudCallDate = d.toLocaleString('cs-CZ');\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 140,
+        "wires": [
+            [
+                "34cc16595fc5c556"
+            ]
+        ]
+    },
+    {
+        "id": "29a3a7d11317e214",
+        "type": "http request",
+        "z": "c2e0a236ce111a55",
+        "name": "",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://localhost:4000/api/measurement",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "bearer",
+        "senderr": false,
+        "headers": [],
+        "x": 750,
+        "y": 140,
+        "wires": [
+            [
+                "bd94a82f7688068c"
+            ]
+        ]
+    },
+    {
+        "id": "bd94a82f7688068c",
+        "type": "switch",
+        "z": "c2e0a236ce111a55",
+        "name": "",
+        "property": "statusCode",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "201",
+                "vt": "num"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 890,
+        "y": 140,
+        "wires": [
+            [
+                "10ff8d7e0dd541d3",
+                "fbdcc58124c7cb30",
+                "38793a2adbae1474"
+            ],
+            [
+                "3946451c87ac8810"
+            ]
+        ]
+    },
+    {
+        "id": "143da812c97674ca",
+        "type": "redis-command",
+        "z": "c2e0a236ce111a55",
+        "server": "731d2d1581b38eb1",
+        "command": "TS.DEL",
+        "name": "",
+        "topic": "",
+        "params": "[]",
+        "paramsType": "json",
+        "payloadType": "json",
+        "block": false,
+        "x": 1490,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "10ff8d7e0dd541d3",
+        "type": "change",
+        "z": "c2e0a236ce111a55",
+        "name": "temperature",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "temperature_compacted",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1110,
+        "y": 80,
+        "wires": [
+            [
+                "6a859d61bebb3a97"
+            ]
+        ]
+    },
+    {
+        "id": "fbdcc58124c7cb30",
+        "type": "change",
+        "z": "c2e0a236ce111a55",
+        "name": "humidity",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "humidity_compacted",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1120,
+        "y": 120,
+        "wires": [
+            [
+                "6a859d61bebb3a97"
+            ]
+        ]
+    },
+    {
+        "id": "6a859d61bebb3a97",
+        "type": "template",
+        "z": "c2e0a236ce111a55",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "json",
+        "syntax": "mustache",
+        "template": "[\n    {{timestamp}},\n    {{timestamp}}\n]",
+        "output": "json",
+        "x": 1320,
+        "y": 100,
+        "wires": [
+            [
+                "143da812c97674ca"
+            ]
+        ]
+    },
+    {
+        "id": "38793a2adbae1474",
+        "type": "ui_text",
+        "z": "c2e0a236ce111a55",
+        "group": "ce44d2dbdc2dadd2",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "name": "Cloud Success",
+        "label": "Last Successful Cloud Update",
+        "format": "{{msg.cloudCallDate}}",
+        "layout": "col-center",
+        "className": "",
+        "x": 1180,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "3946451c87ac8810",
+        "type": "ui_text",
+        "z": "c2e0a236ce111a55",
+        "group": "ce44d2dbdc2dadd2",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "name": "Cloud Failure",
+        "label": "Last Failed Cloud Update",
+        "format": "{{msg.cloudCallDate}}",
+        "layout": "col-center",
+        "className": "",
+        "x": 1190,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "c588040efb0548f1",
+        "type": "catch",
+        "z": "c2e0a236ce111a55",
+        "name": "Catch HTTP Request Error",
+        "scope": [
+            "29a3a7d11317e214"
+        ],
+        "uncaught": false,
+        "x": 890,
+        "y": 200,
+        "wires": [
+            [
+                "3946451c87ac8810"
+            ]
+        ]
+    },
+    {
+        "id": "34cc16595fc5c556",
+        "type": "switch",
+        "z": "c2e0a236ce111a55",
+        "name": "",
+        "property": "timestamp",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "istype",
+                "v": "number",
+                "vt": "number"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 610,
+        "y": 140,
+        "wires": [
+            [
+                "29a3a7d11317e214"
+            ]
+        ]
+    },
+    {
+        "id": "4e76454e600fa53b",
+        "type": "switch",
+        "z": "e64f57bdbc832886",
+        "name": "",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "temperature",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "humidity",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 190,
+        "y": 140,
+        "wires": [
+            [
+                "de1a75de1b75a6e1",
+                "40283d595fc020d0"
+            ],
+            [
+                "d3a933ee3f7e69e4",
+                "dffca1d8d61bcaf9"
+            ]
+        ]
+    },
+    {
+        "id": "40283d595fc020d0",
+        "type": "ui_gauge",
+        "z": "e64f57bdbc832886",
+        "name": "Temperature",
+        "group": "5882aa85429c3ed3",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "gtype": "compass",
+        "title": "Temperature",
+        "label": "°C",
+        "format": "{{value}}",
+        "min": "-20",
+        "max": "50",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 470,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "d3a933ee3f7e69e4",
+        "type": "ui_gauge",
+        "z": "e64f57bdbc832886",
+        "name": "Humidity",
+        "group": "5882aa85429c3ed3",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "wave",
+        "title": "Humidity",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 460,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "de1a75de1b75a6e1",
+        "type": "ui_chart",
+        "z": "e64f57bdbc832886",
+        "name": "",
+        "group": "4a79c40c206e3592",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "label": "Temperature",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "-20",
+        "ymax": "50",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 470,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "dffca1d8d61bcaf9",
+        "type": "ui_chart",
+        "z": "e64f57bdbc832886",
+        "name": "",
+        "group": "4a79c40c206e3592",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "label": "Humidity",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "100",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 460,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d66219372bb4949d",
+        "type": "serial in",
+        "z": "e216599421c76428",
+        "name": "Arduino",
+        "serial": "11979371e3869fb6",
+        "x": 90,
+        "y": 60,
+        "wires": [
+            [
+                "5af3ada1171059c4"
+            ]
+        ]
+    },
+    {
+        "id": "1f313d0ed0292f77",
+        "type": "redis-command",
+        "z": "e216599421c76428",
+        "server": "731d2d1581b38eb1",
+        "command": "TS.ADD",
+        "name": "Add to Redis TS",
+        "topic": "",
+        "params": "",
+        "paramsType": "json",
+        "payloadType": "json",
+        "block": false,
+        "x": 960,
+        "y": 60,
+        "wires": [
+            [
+                "e511120b8f84aca2"
+            ]
+        ]
+    },
+    {
+        "id": "1b43bd4f8f434c09",
+        "type": "json",
+        "z": "e216599421c76428",
+        "name": "Parse JSON",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 410,
+        "y": 60,
+        "wires": [
+            [
+                "3a97c18ce26265fa"
+            ]
+        ]
+    },
+    {
+        "id": "5af3ada1171059c4",
+        "type": "change",
+        "z": "e216599421c76428",
+        "name": "Add Timestamp",
+        "rules": [
+            {
+                "t": "set",
+                "p": "timestamp",
+                "pt": "msg",
+                "to": "",
+                "tot": "date"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 240,
+        "y": 60,
+        "wires": [
+            [
+                "1b43bd4f8f434c09"
+            ]
+        ]
+    },
+    {
+        "id": "3a97c18ce26265fa",
+        "type": "split",
+        "z": "e216599421c76428",
+        "name": "Split by sensor",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "topic",
+        "x": 580,
+        "y": 60,
+        "wires": [
+            [
+                "41c710894ca9dcf1",
+                "5a2e91feff32ccf5"
+            ]
+        ]
+    },
+    {
+        "id": "41c710894ca9dcf1",
+        "type": "template",
+        "z": "e216599421c76428",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "json",
+        "syntax": "mustache",
+        "template": "[\n    {{timestamp}},\n    {{payload}},\n    \"RETENTION\", \n    604800000\n]",
+        "output": "json",
+        "x": 800,
+        "y": 60,
+        "wires": [
+            [
+                "1f313d0ed0292f77"
+            ]
+        ]
+    },
+    {
+        "id": "e511120b8f84aca2",
+        "type": "subflow:8d80ce8fd2475b74",
+        "z": "e216599421c76428",
+        "name": "",
+        "x": 1130,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "1945726e8da2407f",
+        "type": "inject",
+        "z": "e216599421c76428",
+        "name": "",
+        "props": [],
+        "repeat": "2",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 110,
+        "y": 180,
+        "wires": [
+            [
+                "21b07f68236f6250",
+                "fe3835237832a665"
+            ]
+        ]
+    },
+    {
+        "id": "21b07f68236f6250",
+        "type": "change",
+        "z": "e216599421c76428",
+        "name": "temperature",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "temperature_compacted",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "sensor",
+                "pt": "msg",
+                "to": "temperature",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 270,
+        "y": 160,
+        "wires": [
+            [
+                "16b67941e94af26f",
+                "1a23dc5a9a54f6aa"
+            ]
+        ]
+    },
+    {
+        "id": "fe3835237832a665",
+        "type": "change",
+        "z": "e216599421c76428",
+        "name": "humidity",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "humidity_compacted",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "sensor",
+                "pt": "msg",
+                "to": "humidity",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 260,
+        "y": 200,
+        "wires": [
+            [
+                "16b67941e94af26f",
+                "1a23dc5a9a54f6aa"
+            ]
+        ]
+    },
+    {
+        "id": "16b67941e94af26f",
+        "type": "subflow:cf6f4e9a33cc6bc5",
+        "z": "e216599421c76428",
+        "x": 530,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "1a23dc5a9a54f6aa",
+        "type": "subflow:c2e0a236ce111a55",
+        "z": "e216599421c76428",
+        "x": 490,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "5a2e91feff32ccf5",
+        "type": "subflow:e64f57bdbc832886",
+        "z": "e216599421c76428",
+        "x": 820,
+        "y": 120,
+        "wires": []
+    }
+]
