@@ -98,7 +98,7 @@
     {
         "id": "11979371e3869fb6",
         "type": "serial-port",
-        "serialport": "/dev/tty.usbmodem2112401",
+        "serialport": "/dev/ttyACM0",
         "serialbaud": "9600",
         "databits": "8",
         "parity": "none",
