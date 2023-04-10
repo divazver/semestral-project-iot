@@ -49,15 +49,12 @@ router.get(
     .trim()
     .escape()
     .custom((value) => isValidMongoId(value)),
-  query('dateTo').isString().trim().optional({ nullable: true }),
-  query('dateFrom').isString().trim().optional({ nullable: true }),
   validateRequest,
   async (req, res, next) => {
     try {
       const { gatewayId } = req.params;
-      const { dateTo, dateFrom } = req.query;
 
-      const response = await getGateway(gatewayId, dateTo, dateFrom);
+      const response = await getGateway(gatewayId);
 
       res.status(200).send(response);
     } catch (error) {
