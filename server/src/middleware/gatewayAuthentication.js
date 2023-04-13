@@ -14,9 +14,14 @@ const checkGatewayToken = (value) => {
   return async (req, res, next) => {
     try {
       // Take token from http request
-      const token = req.headers.authorization;
-      if (!token) throw new NotAuthorizedError();
+      const tokenOrigin = req.headers.authorization;
+      if (!tokenOrigin) throw new NotAuthorizedError();
 
+      let token;
+
+      if (tokenOrigin.includes('Bearer')) {
+        token = req.headers.authorization.split(' ')[1];
+      } else token = tokenOrigin;
       const getGateway = await _checkGatewayToken(token);
 
       if (getGateway) {

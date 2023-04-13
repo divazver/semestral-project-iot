@@ -51,7 +51,7 @@ const createGateway = async (data, userId) => {
 const getGateway = async (gatewayId) => {
   const gateway = await Gateway.findOne({ _id: gatewayId }, { token: 0 })
     .populate([{ path: 'user', select: { firstName: 1, lastName: 1, email: 1 } }])
-    .populate([{ path: 'measurements', select: { temperature: 1, humidity: 1, time: 1 } }])
+    // .populate([{ path: 'measurements', select: { temperature: 1, humidity: 1, time: 1 } }])
     .lean();
 
   if (!gateway) throw new NotFoundError("Gateway doesn't exists");
@@ -66,7 +66,7 @@ const getGateway = async (gatewayId) => {
 const allGateways = async () => {
   const gateways = await Gateway.find({}, { token: 0 })
     .populate([{ path: 'user', select: { firstName: 1, lastName: 1, email: 1 } }])
-    .populate([{ path: 'measurements', select: { temperature: 1, humidity: 1, time: 1 } }])
+    // .populate([{ path: 'measurements', select: { temperature: 1, humidity: 1, time: 1 } }])
     .lean();
 
   if (gateways?.length <= 0) throw new NoContentError('No gateways');

@@ -1,0 +1,16 @@
+{
+  "name": "semestral-project-iot-gateway",
+  "description": "semestral-project-iot gateway",
+  "version": "1.0.0",
+  "dependencies": {
+    "node-red-contrib-redis": "1.3.9",
+    "node-red-dashboard": "3.4.0",
+    "node-red-node-serialport": "1.0.3"
+  },
+  "node-red": {
+    "settings": {
+      "flowFile": "flow.json",
+      "credentialsFile": "flow_cred.json"
+    }
+  }
+}

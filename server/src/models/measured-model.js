@@ -24,7 +24,13 @@ const measuredSchema = new mongoose.Schema(
       select: true,
     },
   },
-  { timestamps: true },
+  {
+    timeseries: {
+      timeField: 'time',
+      metaField: 'gatewayId',
+      granularity: 'minutes',
+    },
+  },
 );
 
 measuredSchema.virtual('gateway', {

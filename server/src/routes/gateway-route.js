@@ -2,7 +2,7 @@
 
 const express = require('express');
 const router = express.Router();
-const { body, param, matchedData } = require('express-validator');
+const { body, param, matchedData, query } = require('express-validator');
 
 const { validateRequest } = require('../middleware/validate-request');
 const { checkJwt } = require('../middleware/authentication');

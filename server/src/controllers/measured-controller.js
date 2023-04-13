@@ -36,6 +36,32 @@ const createMeasurement = async (data, gateway) => {
     });
 };
 
+/**
+ * Get measurements depends gateway ID and some parameters
+ * @param {string} gatewayId
+ * @param {string} dateTo
+ * @param {string} dateFrom
+ * @returns
+ */
+const getMeasurement = async (gatewayId, dateTo, dateFrom) => {
+  const oneDayBefore = new Date();
+  oneDayBefore.setDate(oneDayBefore.getDate() - 1);
+  const today = new Date();
+
+  const measurement = await Measured.find({
+    gatewayId,
+    time: {
+      $lte: dateTo ?? today,
+      $gte: dateFrom ?? oneDayBefore,
+    },
+  })
+    .populate([{ path: 'gateway', select: { name: 1 } }])
+    .lean();
+
+  return measurement;
+};
+
 module.exports = {
   createMeasurement,
+  getMeasurement,
 };
