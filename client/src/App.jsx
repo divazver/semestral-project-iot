@@ -14,6 +14,7 @@ import Dashboard from "./routes/Dashboard";
 import {useAuth} from "./utils/hooks/useAuth";
 import Page from "./components/Page/Page";
 import NotFound from "./routes/NotFound";
+import GatewayRoute from "./routes/Gateway/GatewayRoute";
 
 const routesMap = [
   {
@@ -48,6 +49,18 @@ const routesMap = [
             path: '/dashboard',
             key: 'dashboard',
             element: <Dashboard/>,
+          },
+          {
+            title: 'Gateway',
+            key: 'gateway',
+            children: [
+              {
+                title: 'Gateway View',
+                path: '/gateway/:id',
+                key: 'gateway-view',
+                element: <GatewayRoute/>,
+              },
+            ],
           },
         ],
       },

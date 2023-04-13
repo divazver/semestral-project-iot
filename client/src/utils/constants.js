@@ -14,4 +14,12 @@ export const ROLES = {
     user: 'user',
 };
 
+export const GRANULARITY_OPTIONS = ["hourly", "day", "month"];
+
+export const GRANULARITY_TO_TIME = {
+  hourly: "HH:mm",
+  day: "dd.LL",
+  month: "LLL",
+}
+
 export const TIME_OUT_RESPONSE = '2000';

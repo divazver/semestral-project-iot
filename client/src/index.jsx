@@ -7,6 +7,8 @@ import {BrowserRouter} from "react-router-dom";
 import {AuthProvider} from "./utils/hooks/useAuth";
 
 import theme from 'theme';
+import {LocalizationProvider} from '@mui/x-date-pickers';
+import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFns'
 import {ValidationProvider} from "./utils/hooks/useValidation";
 import {AppContextProvider} from "./utils/hooks/useAppState";
 
@@ -14,15 +16,17 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <ValidationProvider>
-        <AuthProvider>
-          <ThemeProvider theme={theme}>
-            <AppContextProvider>
-              <App/>
-            </AppContextProvider>
-          </ThemeProvider>
-        </AuthProvider>
-      </ValidationProvider>
+      <LocalizationProvider dateAdapter={AdapterDateFns}>
+        <ValidationProvider>
+          <AuthProvider>
+            <ThemeProvider theme={theme}>
+              <AppContextProvider>
+                <App/>
+              </AppContextProvider>
+            </ThemeProvider>
+          </AuthProvider>
+        </ValidationProvider>
+      </LocalizationProvider>
     </BrowserRouter>
   </React.StrictMode>,
 );

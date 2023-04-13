@@ -18,3 +18,4 @@ const GatewayPinButton = ({gatewayId}) => {
 }
 
 export default GatewayPinButton;
+
