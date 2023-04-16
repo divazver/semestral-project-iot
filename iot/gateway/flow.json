@@ -651,7 +651,7 @@
         "method": "POST",
         "ret": "obj",
         "paytoqs": "ignore",
-        "url": "http://localhost:4000/api/measurement",
+        "url": "http://brodec.sk:4000/api/measurement",
         "tls": "",
         "persist": false,
         "proxy": "",
