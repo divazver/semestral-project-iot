@@ -19,9 +19,9 @@ import {solveLinearSystem} from './solve-lse.js'
  * _______________________________________________________________________   x-Axe
  * 1         2         3         4         5         6         7         8
  * 
- * @param {int} index - "index" of the first minute, that should be calculated <0, 34> indexing starts with 1 (better for further calculations)
+ * @param {int} index - "index" of the first minute, that should be calculated <1, 34> indexing starts with 1 (better for further calculations)
  * 
- * @param {int} datapoints - number of data points, that should be calculated starting with index, where index + datapoints <= 36 AND 2 <= k <= 30
+ * @param {int} datapoints - number of data points, that should be calculated starting with index, where index + datapoints <= 36 AND 2 <= datapoints <= 30
  * 
  * @returns {Array} upsampledData - The list of n temperature & humidity values passed as an Array of Objects [{temperature: number, humidity: number}, ...] covering the interval
  * 
