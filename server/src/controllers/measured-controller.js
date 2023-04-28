@@ -3,6 +3,9 @@
 const Gateway = require('../models/gateway-model');
 const Measured = require('../models/measured-model');
 
+const {upsamplingTimeTransformation, upsampling} = require("../helpers/upsampling");
+const {downsamplingTimeTransformation, downsampling} = require("../helpers/downsampling");
+
 const logger = require('../utils/logger');
 
 /**
@@ -41,24 +44,46 @@ const createMeasurement = async (data, gateway) => {
  * @param {string} gatewayId
  * @param {string} dateTo
  * @param {string} dateFrom
+ * @param {string} granularity
  * @returns
  */
-const getMeasurement = async (gatewayId, dateTo, dateFrom) => {
-  const oneDayBefore = new Date();
-  oneDayBefore.setDate(oneDayBefore.getDate() - 1);
-  const today = new Date();
+const getMeasurement = async (gatewayId, dateFrom, dateTo, granularity) => {
+  let dateFromSearch;
+  let dateToSearch;
+  let datapoints;
+  let index;
+  let descriptionsArray;
+  let measurements;
 
-  const measurement = await Measured.find({
+  // case Upsampling
+  if (+granularity === 1) {
+    [dateFromSearch, dateToSearch, datapoints, index, descriptionsArray] = upsamplingTimeTransformation(dateFrom, dateTo);
+  }
+  // case Downsampling
+  else {
+    [dateFromSearch, dateToSearch, datapoints, descriptionsArray] = downsamplingTimeTransformation(dateFrom, dateTo, granularity);
+  }
+
+  const measurementRaw = await Measured.find({
     gatewayId,
     time: {
-      $lte: dateTo ?? today,
-      $gte: dateFrom ?? oneDayBefore,
+      $lte: dateToSearch,
+      $gte: dateFromSearch,
     },
   })
     .populate([{ path: 'gateway', select: { name: 1 } }])
     .lean();
 
-  return measurement;
+  // case Upsampling
+  if (+granularity == 1) {
+    measurements = upsampling(measurementRaw, datapoints, index, descriptionsArray);
+  }
+  // case Downsampling
+  else {
+    measurements = downsampling(measurementRaw, datapoints, descriptionsArray);
+  }
+
+  return measurements;
 };
 
 module.exports = {
