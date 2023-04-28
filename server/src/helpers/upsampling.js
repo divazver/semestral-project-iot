@@ -179,7 +179,7 @@ function upsampling(downsampledData, datapoints, index, descriptionsArray) {
       let obj = {
         temperature: datapointsArray[i].temperature,
         humidity: datapointsArray[i].humidity,
-        time: new Date(descriptionsArray[i])
+        time: new Date(descriptionsArray[i]).toISOString()
       };
       completedWeatherData.push(obj);
     }
