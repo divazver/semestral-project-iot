@@ -74,6 +74,9 @@ const getMeasurement = async (gatewayId, dateFrom, dateTo, granularity) => {
     .populate([{ path: 'gateway', select: { name: 1 } }])
     .lean();
 
+  // reversing the array 
+  measurementRaw.reverse();
+
   // case Upsampling
   if (+granularity == 1) {
     measurements = upsampling(measurementRaw, datapoints, index, descriptionsArray);
