@@ -1,6 +1,6 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {Button, Divider, TextField} from "@mui/material";
-import useValidationError from "../../utils/useValidationError";
+import {useValidation} from "../../utils/hooks/useValidation";
 import {isEmptyValue, isValidEmail} from "../../utils/utils";
 
 const SignUpForm = ({loading, setLoading, onSubmit}) => {
@@ -12,11 +12,12 @@ const SignUpForm = ({loading, setLoading, onSubmit}) => {
     password: "",
   });
   const [repeatedPassword, setRepeatedPassword] = useState("");
-  const {setErrors, hasError, getError, removeError} = useValidationError();
+  const {errors, setErrors, hasError, getError, removeError} = useValidation();
 
   const handleSubmit = (event) => {
     event.preventDefault();
     setLoading(true);
+    setErrors({});
 
     let tempErrors = {};
 
@@ -50,6 +51,7 @@ const SignUpForm = ({loading, setLoading, onSubmit}) => {
     }
 
     if (Object.keys(tempErrors).length > 0) {
+      tempErrors["global"] = "Validation failed."
       setErrors(tempErrors);
       setLoading(false);
     } else {

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {useOutletContext} from 'react-router-dom';
 import {Alert, Typography} from "@mui/material";
-import SignUpForm from "../Components/SignUpForm/SignUpForm";
+import SignUpForm from "../components/SignUpForm/SignUpForm";
 import {registerUser} from "../api/user/user";
 import {useValidation} from "../utils/hooks/useValidation";
 import {useAuth} from "../utils/hooks/useAuth";

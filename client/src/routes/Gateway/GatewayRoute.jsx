@@ -4,11 +4,11 @@ import {getGateway} from "../../api/gateway/gateway";
 import {Grid, Paper, Typography, FormControl, InputLabel, Select, MenuItem} from "@mui/material";
 import {DateTimePicker} from '@mui/x-date-pickers/DateTimePicker';
 import {parseISO} from 'date-fns';
-import Loader from "../../components/Loader/Loader";
-import GatewayNotFound from "../../components/GatewayNotFound/GatewayNotFound";
-import GatewayGraph from "../../components/GatewayGraph/GatewayGraph";
+import Loader from "components/Loader/Loader";
+import GatewayNotFound from "components/GatewayNotFound/GatewayNotFound";
+import GatewayGraph from "components/GatewayGraph/GatewayGraph";
 import {GRANULARITY_OPTIONS} from "utils/constants";
-import GatewayDataTable from "../../components/GatewayDataTable/GatewayDataTable";
+import GatewayDataTable from "components/GatewayDataTable/GatewayDataTable";
 
 const GatewayRoute = () => {
   const [loading, setLoading] = useState(true);
@@ -57,7 +57,7 @@ const GatewayRoute = () => {
           }}
           elevation={1}
         >
-          <GatewayGraph measurements={gateway.measurements} granularity={'hourly'}/>
+          {/*<GatewayGraph measurements={gateway.measurements} granularity={'hourly'}/>*/}
         </Paper>
         <Grid container sx={{mt: 5}}>
           <Grid item xs={12} sm={6} md={3}>
@@ -91,10 +91,10 @@ const GatewayRoute = () => {
           </Grid>
         </Grid>
         <Typography variant={'h4'} sx={{mt: 5, mb: 2}}>Data table</Typography>
-        <GatewayDataTable measurements={gateway.measurements} />
+        {/*<GatewayDataTable measurements={gateway.measurements} />*/}
       </>
       : <GatewayNotFound/>}
   </>);
-}
+};
 
 export default GatewayRoute;
