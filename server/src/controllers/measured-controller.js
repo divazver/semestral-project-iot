@@ -57,8 +57,13 @@ const getMeasurement = async (gatewayId, dateFrom, dateTo, granularity) => {
   let descriptionsArray;
   let measurements;
 
+  // parsing the inputs
+  dateFrom = new Date(dateFrom);
+  dateTo = new Date(dateTo);
+  granularity = granularity ? parseInt(granularity) : 5;
+
   // case Upsampling
-  if (+granularity === 1) {
+  if (granularity === 1) {
     [dateFromSearch, dateToSearch, datapoints, index, descriptionsArray] = upsamplingTimeTransformation(dateFrom, dateTo);
   }
   // case Downsampling
@@ -80,7 +85,7 @@ const getMeasurement = async (gatewayId, dateFrom, dateTo, granularity) => {
   measurementRaw.reverse();
 
   // case Upsampling
-  if (+granularity == 1) {
+  if (granularity === 1) {
     measurements = upsampling(measurementRaw, datapoints, index, descriptionsArray);
   }
   // case Downsampling
