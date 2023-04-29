@@ -18,8 +18,8 @@ const logger = require('../utils/logger');
 const createMeasurement = async (data, gateway) => {
   data.gatewayId = gateway._id;
   data.time = new Date(+data.time).toUTCString();
-  data.temperature = data.temperature.toFixed(1);
-  data.humidity = data.humidity.toFixed(2);
+  data.temperature = parseFloat(data.temperature).toFixed(1);
+  data.humidity = parseFloat(data.humidity).toFixed(2);
 
   const measurement = new Measured(data);
 
@@ -57,13 +57,18 @@ const getMeasurement = async (gatewayId, dateFrom, dateTo, granularity) => {
   let descriptionsArray;
   let measurements;
 
+  // parsing the inputs
+  dateFrom = new Date(dateFrom);
+  dateTo = new Date(dateTo);
+  granularity = granularity ? parseInt(granularity) : 5;
+
   // case Upsampling
-  if (+granularity === 1) {
+  if (granularity === 1) {
     [dateFromSearch, dateToSearch, datapoints, index, descriptionsArray] = upsamplingTimeTransformation(dateFrom, dateTo);
   }
   // case Downsampling
   else {
-    [dateFromSearch, dateToSearch, datapoints, descriptionsArray] = downsamplingTimeTransformation(dateFrom, dateTo, granularity);
+    [dateFromSearch, dateToSearch, datapoints, descriptionsArray] = downsamplingTimeTransformation(new Date(dateFrom), new Date(dateTo), granularity);
   }
 
   const measurementRaw = await Measured.find({
@@ -76,11 +81,11 @@ const getMeasurement = async (gatewayId, dateFrom, dateTo, granularity) => {
     .populate([{ path: 'gateway', select: { name: 1 } }])
     .lean();
 
-  // reversing the array 
+  // reversing the array
   measurementRaw.reverse();
 
   // case Upsampling
-  if (+granularity == 1) {
+  if (granularity === 1) {
     measurements = upsampling(measurementRaw, datapoints, index, descriptionsArray);
   }
   // case Downsampling

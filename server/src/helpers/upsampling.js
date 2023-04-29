@@ -1,4 +1,4 @@
-// solving linear system of equations 
+// solving linear system of equations
 function solveLinearSystem(A, b) {
   // Check that the input is a valid system of linear equations
   if (!Array.isArray(A) || !Array.isArray(b) || A.length !== b.length) {
@@ -58,7 +58,7 @@ function createInterpolationMatrix(n) {
   // in case the granularity is set to 1 minute, data must be upsampled
   // beforehand the date from - to information has to be converted to the inputs of the upsampling function
   // this is the method to do it
-function upsamplingTimeTransformation(dateFrom, dateTo) {
+const upsamplingTimeTransformation = (dateFrom, dateTo) => {
   dateFrom = new Date(dateFrom);
   dateTo = new Date(dateTo);
 
@@ -102,27 +102,27 @@ function upsamplingTimeTransformation(dateFrom, dateTo) {
 * method to calculate upsampled data (granularity 1 minute)
 * @param {Array} downsampledData - The list of 8 temperature & 8 humidity values passed as an Array of Objects [{temperature: number, humidity: number}, ...]
 * covering the longest possible interval with 1 minute granularity - 30 min - starting at any index <0, 4>
-* 
+*
 * | - - - - | - - - - | - - - - | - - - - | - - - - | - - - - | - - - - |
 * 0 min     5 min    10 min    15 min    20 min    25 min    30 min    35 min
-* 
-* 
+*
+*
 *                                                                                  "x" = datapoint input - every 5 minutes
 *                                                           /-x---------x          "-", "/", "\" - polynomial representation
 *      -----x---------x------                    /-x--------
-*     /                      \--x---------x------    
+*     /                      \--x---------x------
 * x--/
-* 
+*
 * _______________________________________________________________________   x-Axe
 * 1         2         3         4         5         6         7         8
-* 
+*
 * @param {int} index - "index" of the first minute, that should be calculated <1, 34> indexing starts with 1 (better for further calculations)
-* 
+*
 * @param {int} datapoints - number of data points, that should be calculated starting with index, where index + datapoints <= 36 AND 2 <= datapoints <= 30
-* 
+*
 * @returns {Array} upsampledData - The list of n temperature & humidity values passed as an Array of Objects [{temperature: number, humidity: number}, ...] covering the interval
 */
-function upsampling(downsampledData, datapoints, index, descriptionsArray) {
+const upsampling = (downsampledData, datapoints, index, descriptionsArray) => {
 
   let completedWeatherData = [];
 
@@ -137,7 +137,7 @@ function upsampling(downsampledData, datapoints, index, descriptionsArray) {
   // checking, if the index won't be outside of calculated interval
   if (index + datapoints > 37) {
       throw new Error('Invalid parameters: indexed values are out of range')
-  }  
+  }
 
   // extracting two lists of data - humidity and temperature
   const temperatures = downsampledData.map(obj => obj.temperature);
@@ -154,7 +154,7 @@ function upsampling(downsampledData, datapoints, index, descriptionsArray) {
   // lists to store the upsampled values that will be further used
   const upsampledTemperatures = [];
   const upsampledHumidities = [];
-  
+
   // 1 is the first datapoint on our curve (see graph)
   // one step = one minute = 1/5 = 0.2
   // step length * (number of steps - 1) --> first step is the datapoint x = 1
@@ -183,9 +183,11 @@ function upsampling(downsampledData, datapoints, index, descriptionsArray) {
       };
       completedWeatherData.push(obj);
     }
-    
+
 
   return completedWeatherData;
 
 
 }
+
+module.exports = {upsamplingTimeTransformation, upsampling}

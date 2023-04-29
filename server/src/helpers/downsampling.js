@@ -1,5 +1,5 @@
 // the date from - to information has to be converted to the inputs of the downsampling function
-function downsamplingTimeTransformation(dateFrom, dateTo, granularity) {
+const downsamplingTimeTransformation = (dateFrom, dateTo, granularity) => {
     let fiveMinutes = 5 * 60 * 1000;
     let descriptionsArray = [];
     let datapoints = 0;
@@ -32,7 +32,7 @@ function downsamplingTimeTransformation(dateFrom, dateTo, granularity) {
 * @returns {Array} downsampledData - The list of k temperature & humidity values returned as an Array of Objects [{temperature: number, humidity: number}, ...]
 * where k < n AND k = this.datapoints
 */
-function downsampling(data, datapoints, descriptionsArray) {
+const downsampling = (data, datapoints, descriptionsArray) => {
 
     let completedWeatherData = [];
     const n = data.length;
@@ -60,7 +60,7 @@ function downsampling(data, datapoints, descriptionsArray) {
     let sumTemperatures = 0;
     let sumHumidities = 0;
     let count = 0;
-    
+
     // loop iterating through all n values, computing means of deciles
     for (let i = 0; i < n + 1; i++) {
         // pivot = breakpoint --> new mean will be calculated
@@ -80,7 +80,7 @@ function downsampling(data, datapoints, descriptionsArray) {
             count++;
         }
     }
-    
+
     // storing all data into an object, that will be returned
     let datapointsArray = meansTemperature.map((mean, index) => ({
         temperature: mean,
@@ -99,3 +99,5 @@ function downsampling(data, datapoints, descriptionsArray) {
 
     return completedWeatherData;
 }
+
+module.exports = {downsamplingTimeTransformation, downsampling}
