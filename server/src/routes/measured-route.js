@@ -39,25 +39,21 @@ router.post(
 router.get(
   '/measurement/gateway/:gatewayId',
   checkJwt(),
-  param('gatewayId')
-    .not()
-    .isEmpty()
-    .isString()
-    .trim()
-    .escape()
-    .custom((value) => isValidMongoId(value)),
+  param('gatewayId').not().isEmpty().isString().trim().escape().custom((value) => isValidMongoId(value)),
   query('dateTo').isString().trim().optional({ nullable: true }),
   query('dateFrom').isString().trim().optional({ nullable: true }),
   query('granularity').isNumeric().trim().optional({ nullable: true }),
   validateRequest,
+
   async (req, res, next) => {
     try {
       const { gatewayId } = req.params;
-      const { dateTo, dateFrom } = req.query;
+      const { dateTo, dateFrom, granularity } = req.query;
 
-      const response = await getMeasurement(gatewayId, dateTo, dateFrom);
+      const response = await getMeasurement(gatewayId, dateFrom, dateTo, granularity);
 
       res.status(200).send(response);
+      
     } catch (error) {
       next(error);
     }
