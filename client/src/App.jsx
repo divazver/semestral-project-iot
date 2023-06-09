@@ -15,6 +15,7 @@ import {useAuth} from "./utils/hooks/useAuth";
 import Page from "./components/Page/Page";
 import NotFound from "./routes/NotFound";
 import GatewayRoute from "./routes/Gateway/GatewayRoute";
+import GatewayListRoute from "./routes/Gateway/GatewayListRoute";
 
 const routesMap = [
   {
@@ -59,6 +60,12 @@ const routesMap = [
                 path: '/gateway/:id',
                 key: 'gateway-view',
                 element: <GatewayRoute/>,
+              },
+              {
+                title: 'Gateway List',
+                path: '/gateways',
+                key: 'gateways',
+                element: <GatewayListRoute/>,
               },
             ],
           },
