@@ -18,7 +18,7 @@ const logger = require('../utils/logger');
 const createMeasurement = async (data, gateway) => {
   data.gatewayId = gateway._id;
   data.time = new Date(+data.time).toUTCString();
-  data.temperature = parseFloat(data.temperature).toFixed(1);
+  data.temperature = parseFloat(data.temperature).toFixed(2);
   data.humidity = parseFloat(data.humidity).toFixed(2);
 
   const measurement = new Measured(data);
