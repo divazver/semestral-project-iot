@@ -1,11 +1,12 @@
 import Client from "../client/client";
+import {formatISO} from 'date-fns';
 
-export const getMeasurementsByGateway = (id, dateFrom, dateTo, granularity) =>
+export const getMeasurementsByGateway = (id, dateFrom, dateTo, granularity = 5) =>
   Client({
     url: `measurement/gateway/${id}`,
     params: {
-      dateFrom,
-      dateTo,
+      dateFrom: formatISO(dateFrom),
+      dateTo: formatISO(dateTo),
       granularity,
     },
   });

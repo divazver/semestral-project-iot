@@ -35,7 +35,7 @@ const options = {
   },
 };
 
-const GatewayGraph = ({measurements, granularity}) => {
+const GatewayTemperatureGraph = ({measurements, granularity}) => {
   const labels = [...measurements.map((measurement) =>
     format(parseISO(measurement.time), GRANULARITY_TO_TIME[granularity]
       ? GRANULARITY_TO_TIME[granularity]
@@ -50,16 +50,10 @@ const GatewayGraph = ({measurements, granularity}) => {
         borderColor: 'rgb(244, 224, 77)',
         backgroundColor: 'rgba(244, 224, 77, 0.5)',
       },
-      {
-        label: "Humidity",
-        data: measurements.map((measurement) => measurement?.humidity),
-        borderColor: 'rgb(13, 195, 255)',
-        backgroundColor: 'rgba(13, 195, 255, 0.5)',
-      },
     ],
   }
 
   return <Line options={options} data={data}/>;
 }
 
-export default GatewayGraph;
+export default GatewayTemperatureGraph;

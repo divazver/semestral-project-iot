@@ -31,7 +31,6 @@ const SimpleGraph = ({measurements, label, accessor, color}) => {
   const values = measurements.map((measurement) => measurement[accessor]);
   const minValue = Math.floor(Math.min.apply(null, values));
   const maxValue = Math.ceil(Math.max.apply(null, values));
-  console.log(values, minValue, maxValue);
 
   const options = {
     responsive: true,

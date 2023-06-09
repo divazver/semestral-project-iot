@@ -23,12 +23,13 @@ const GatewayDataTable = ({measurements}) => {
 
   const rows = measurements.map((measurement) => ({
     id: format(parseISO(measurement?.time), 'HH:mm dd.LL.yyyy'),
-    temperature: measurement?.temperature,
-    humidity: measurement?.humidity,
+    temperature: `${measurement?.temperature.toFixed(1)}°`,
+    humidity: `${measurement?.humidity.toFixed(2)}%`,
   }))
 
   return <Box sx={{width: '100%', height: 550}}>
     <DataGrid
+      rowSelection={false}
       rows={rows}
       columns={columns}
       bulkActionButtons={false}
@@ -40,7 +41,6 @@ const GatewayDataTable = ({measurements}) => {
         },
       }}
       pageSizeOptions={[15]}
-      checkboxSelection
       disableRowSelectionOnClick
     />
   </Box>

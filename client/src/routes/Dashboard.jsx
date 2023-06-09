@@ -48,8 +48,8 @@ const Dashboard = () => {
         const currentRoundedTime = getRoundedDate(5, new Date());
 
         const {dateFrom, dateTo} = {
-          dateFrom: formatISO(sub(currentRoundedTime, {minutes: 50})),
-          dateTo: formatISO(currentRoundedTime),
+          dateFrom: sub(currentRoundedTime, {minutes: 50}),
+          dateTo: currentRoundedTime,
         };
 
         gateways.forEach((gateway) => {
@@ -65,6 +65,7 @@ const Dashboard = () => {
   useEffect(() => {
     setPageTitle('Dashboard');
     getGateways();
+    console.log("doooooo");
     const interval = setInterval(() => {
       setLoadingMetaData(true);
       getGateways();
