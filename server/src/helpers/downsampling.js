@@ -92,7 +92,7 @@ const downsampling = (data, datapoints, descriptionsArray) => {
     let obj = {
         temperature: datapointsArray[datapointsArray.length - 1 - i].temperature,
         humidity: datapointsArray[datapointsArray.length - 1 - i].humidity,
-        description: new Date(descriptionsArray[i]).toISOString()
+        time: new Date(descriptionsArray[i]).toISOString()
     };
     completedWeatherData.push(obj);
     }
