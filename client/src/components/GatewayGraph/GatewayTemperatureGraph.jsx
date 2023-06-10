@@ -46,7 +46,7 @@ const GatewayTemperatureGraph = ({measurements, granularity}) => {
     datasets: [
       {
         label: "Temperature",
-        data: measurements.map((measurement) => measurement?.temperature),
+        data: measurements.map((measurement) => measurement?.temperature.toFixed(1)),
         borderColor: 'rgb(244, 224, 77)',
         backgroundColor: 'rgba(244, 224, 77, 0.5)',
       },

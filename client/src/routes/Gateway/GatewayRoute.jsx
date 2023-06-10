@@ -1,15 +1,14 @@
 import React, {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import {getGateway} from "../../api/gateway/gateway";
-import {Grid, Paper, Typography, FormControl, InputLabel, Select, MenuItem} from "@mui/material";
-import {DateTimePicker} from '@mui/x-date-pickers/DateTimePicker';
-import {parseISO} from 'date-fns';
+import {Grid, Paper, Typography, FormControl, InputLabel, Select, MenuItem, Button} from "@mui/material";
+import {DateTimePicker, DatePicker} from '@mui/x-date-pickers/DateTimePicker';
 import Loader from "components/Loader/Loader";
 import GatewayNotFound from "components/GatewayNotFound/GatewayNotFound";
 import GatewayTemperatureGraph from "components/GatewayGraph/GatewayTemperatureGraph";
-import {GRANULARITY_OPTIONS} from "utils/constants";
+import {GRANULARITY_OPTIONS, GRANULARITY_RANGES} from "utils/constants";
 import GatewayDataTable from "components/GatewayDataTable/GatewayDataTable";
-import {sub, format} from 'date-fns';
+import {sub, format, differenceInMinutes} from 'date-fns';
 import {getMeasurementsByGateway} from "../../api/measurement/measurement";
 import {getRoundedDate} from "../../utils/utils";
 import GatewayHumidityGraph from "../../components/GatewayGraph/GatewayHumidityGraph";
@@ -24,19 +23,31 @@ const GatewayRoute = () => {
     from: sub(currentRoundedTime, {minutes: 50}),
     to: currentRoundedTime,
   });
-  const [granularity, setGranularity] = useState("hourly");
+  const [granularity, setGranularity] = useState(5);
   const {id} = useParams();
 
   const changeGranularity = (event) => setGranularity(event.target.value);
 
+  const isGranularityDisabled = (granularity, to, from) => {
+    let distanceInMinutes = differenceInMinutes(to, from);
+
+    let granularityRange = GRANULARITY_RANGES[granularity];
+
+    return distanceInMinutes < granularityRange.from || distanceInMinutes > granularityRange.to;
+  }
+
+  const getFirstAvailableGranularity = (to, from) =>
+    Object.values(GRANULARITY_OPTIONS).find((value) => !isGranularityDisabled(value, to, from))
+
   const changeRangeValue = (key, value) => {
     let tempRange = {from, to};
     tempRange[key] = value;
+    setGranularity(getFirstAvailableGranularity());
     setDateRange(tempRange);
   }
 
-  const loadGatewayMeasurements = (id, from, to) => {
-    getMeasurementsByGateway(id, from, to)
+  const loadGatewayMeasurements = (id, from, to, granularity) => {
+    getMeasurementsByGateway(id, from, to, granularity)
       .then((response) => {
         if (response?.data) {
           setStatistics(response?.data);
@@ -56,7 +67,7 @@ const GatewayRoute = () => {
     .finally(() => setLoading(false));
 
   useEffect(() => {
-    getGatewayInfo(id, from, to);
+    getGatewayInfo(id, from, to, granularity);
   }, [id])
 
   return (loading ? <Loader message={"Loading gateway"}/> : <>
@@ -96,6 +107,7 @@ const GatewayRoute = () => {
             <DateTimePicker
               label="From"
               value={from}
+              disableFuture={true}
               onChange={(value) => changeRangeValue("from", value)}
             />
           </Grid>
@@ -103,6 +115,7 @@ const GatewayRoute = () => {
             <DateTimePicker
               label="To"
               value={to}
+              disableFuture={true}
               onChange={(value) => changeRangeValue("to", value)}
             />
           </Grid>
@@ -116,10 +129,21 @@ const GatewayRoute = () => {
                 label="Granularity"
                 onChange={changeGranularity}
               >
-                {GRANULARITY_OPTIONS.map((granularity, index) =>
-                  <MenuItem key={`granularity-${index}`} value={granularity}>{granularity}</MenuItem>)}
+                {Object.entries(GRANULARITY_OPTIONS).map(([label, granularity], index) =>
+                  <MenuItem
+                    key={`granularity-${index}`}
+                    value={granularity}
+                    disabled={isGranularityDisabled(granularity, to, from)}>{label}</MenuItem>)}
               </Select>
             </FormControl>
+          </Grid>
+
+          <Grid item xs={12} sm={6} md={3} sx={{
+            display: 'flex',
+            alignItems: 'center',
+            pl: 2,
+          }}>
+            <Button variant="contained" size={"large"} onClick={() => loadGatewayMeasurements(id, from, to, granularity)}>Get data</Button>
           </Grid>
         </Grid>
         <Typography variant={'h4'} sx={{mt: 5, mb: 2}}>Data table</Typography>
