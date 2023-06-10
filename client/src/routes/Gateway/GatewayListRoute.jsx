@@ -22,7 +22,7 @@ const Demo = styled('div')(({ theme }) => ({
 }));
 
 const GatewaylistRoute = () => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [gateways, setGateways] = useState(undefined);
   const [dense, setDense] = React.useState(false);
   const [secondary, setSecondary] = React.useState(false);
