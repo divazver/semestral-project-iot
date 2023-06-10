@@ -24,9 +24,9 @@ router.post('/dummy-seed', (req, res, next) => {
 
 router.post('/clever-seed', (req, res, next) => {
   try{
-      const { timeFrom } = req.query;
+      const { timeFrom, gatewayId } = req.query;
 
-      let x = createCleverData(timeFrom)
+      createCleverData(timeFrom, gatewayId)
       .then((roundedTimestamp) => {
         res.status(200).send({ message: `Seed successfully ${roundedTimestamp}` });
       })

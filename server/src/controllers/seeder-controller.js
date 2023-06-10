@@ -75,7 +75,7 @@ const createDummyData = async () => {
   }
 };
 
-const createCleverData = async (dateFrom) => {
+const createCleverData = async (dateFrom, gatewayId) => {
   const mongoUri = env.get('MONGO_URI_DOCKER').required().asUrlString();
   const mongoDbName = env.get('DB_NAME').required().asString();
 
@@ -105,15 +105,15 @@ const createCleverData = async (dateFrom) => {
   let temp = 23;
   let hum = 53;
 
-  let gatewayForSeed = await getGateway("6483550396ee1b1bfbfb152b");
+  let gatewayForSeed = await getGateway(gatewayId);
 
   while (timestamp <= finalTimestamp) {
 
     let randomTemp = Math.random();
     let randomHum = Math.random();
 
-    if (randomTemp > 0.5) {
-      temp += 0.1;
+    if (Math.abs(randomTemp - 0.5) < 0.2) {
+      temp += 0;
     } else {
       temp -= 0.1;
     }
