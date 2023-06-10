@@ -90,8 +90,8 @@ const downsampling = (data, datapoints, descriptionsArray) => {
     // creating compound objects
     for (let i = 0; i < datapointsArray.length; i++) {
     let obj = {
-        temperature: datapointsArray[i].temperature,
-        humidity: datapointsArray[i].humidity,
+        temperature: datapointsArray[datapointsArray.length - 1 - i].temperature,
+        humidity: datapointsArray[datapointsArray.length - 1 - i].humidity,
         description: new Date(descriptionsArray[i]).toISOString()
     };
     completedWeatherData.push(obj);
