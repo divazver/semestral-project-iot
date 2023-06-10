@@ -46,7 +46,7 @@ const GatewayHumidityGraph = ({measurements, granularity}) => {
     datasets: [
       {
         label: "Humidity",
-        data: measurements.map((measurement) => measurement?.humidity),
+        data: measurements.map((measurement) => measurement?.humidity.toFixed(2)),
         borderColor: 'rgb(13, 195, 255)',
         backgroundColor: 'rgba(13, 195, 255, 0.5)',
       },
