@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Divider, TextField } from '@mui/material';
+import { TextField } from '@mui/material';
 import { useValidation } from '../../utils/hooks/useValidation';
 import { isEmptyValue } from '../../utils/utils';
-import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
 import AddIcon from '@mui/icons-material/Add';
 import IconButton from '@mui/material/IconButton';
 import Avatar from '@mui/material/Avatar';
 import FolderIcon from '@mui/icons-material/Folder';
-import { deleteGateway as deleteGatewayClient, getGateway, createGateway as createGatewayClient } from '../../api/gateway/gateway';
+import { createGateway as createGatewayClient } from '../../api/gateway/gateway';
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
 import CloseIcon from '@mui/icons-material/Close';
@@ -44,7 +41,6 @@ const GatewayForm = ({ loading, setLoading, onSubmit, getGateways }) => {
       onSubmit({ gatewayName });
     }
   };
-  const hideAlert = () => setNewGateway(false);
 
   const handleChange = (event) => {
     let name = event.target.name;
@@ -60,8 +56,6 @@ const GatewayForm = ({ loading, setLoading, onSubmit, getGateways }) => {
   const createGateway = (name) =>
     createGatewayClient(name)
     .then((response) => {
-      console.log('response', response);
-      console.log('TOKEN:', response?.data?.token)
       setToken(response?.data?.token)
       getGateways()
       setGatewayName('')
@@ -69,6 +63,7 @@ const GatewayForm = ({ loading, setLoading, onSubmit, getGateways }) => {
       setOpen(true);
     })
     .catch((error) => console.log(error))
+
 
   return (
     <form noValidate onSubmit={handleSubmit}>
@@ -99,7 +94,7 @@ const GatewayForm = ({ loading, setLoading, onSubmit, getGateways }) => {
         key="add_new"
         secondaryAction={
           <IconButton edge="end" aria-label="add">
-            <AddIcon onClick={(event) => createGateway(gatewayName)} />
+            <AddIcon onClick={() => createGateway(gatewayName)} />
           </IconButton>
         }>
         <ListItemAvatar>
