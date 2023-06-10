@@ -10,6 +10,7 @@ import { CircularProgress, Box } from '@mui/material';
 import {useRoutes} from "react-router-dom";
 import SignUp from "./routes/Signup";
 import AuthRoute from "./routes/AuthRoute";
+import AdminRoute from "./routes/AdminRoute"
 import Dashboard from "./routes/Dashboard";
 import {useAuth} from "./utils/hooks/useAuth";
 import Page from "./components/Page/Page";
@@ -61,13 +62,19 @@ const routesMap = [
                 key: 'gateway-view',
                 element: <GatewayRoute/>,
               },
-              {
-                title: 'Gateway List',
-                path: '/gateways',
-                key: 'gateways',
-                element: <GatewayListRoute/>,
-              },
             ],
+          },
+        ],
+      },
+      {
+        title: 'AdminRoute',
+        element: <AdminRoute/>,
+        children: [
+          {
+            title: 'Gateway List',
+            path: '/gateways',
+            key: 'gateways',
+            element: <GatewayListRoute/>,
           },
         ],
       },

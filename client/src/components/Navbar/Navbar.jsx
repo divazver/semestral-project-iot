@@ -119,6 +119,15 @@ const Navbar = ({navItems}) => {
                   );
                 }
               })}
+              {isAdmin &&
+                    <Link
+                    key='gateways'
+                    color={'text.primary'}
+                    sx={{cursor: 'pointer', ml: 2, fontWeight: 2, typography: 'subtitle2'}}
+                    onClick={() => navigate('/gateways')}
+                    underline={'none'}>
+                    Gateways
+                  </Link>}
             </Box>
 
             {authenticated ? (
