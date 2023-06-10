@@ -1,7 +1,7 @@
 'use strict';
 
 const express = require('express');
-const createDummyData = require('../controllers/seeder-controller');
+const {createDummyData, createCleverData} = require('../controllers/seeder-controller'); 
 const env = require('env-var');
 
 const router = express.Router();
@@ -22,6 +22,21 @@ router.post('/dummy-seed', (req, res, next) => {
   }
 });
 
+router.post('/clever-seed', (req, res, next) => {
+  try{
+      const { timeFrom, gatewayId } = req.query;
+
+      createCleverData(timeFrom, gatewayId)
+      .then((roundedTimestamp) => {
+        res.status(200).send({ message: `Seed successfully ${roundedTimestamp}` });
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  } catch (error) {
+    next(error);
+  }
+});
 module.exports = {
   dummySeedRoute: router,
 };

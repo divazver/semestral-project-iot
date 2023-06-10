@@ -8,9 +8,13 @@ const { DUMMY_USER } = require('../data/dummyUser');
 const { DUMMY_GATEWAY } = require('../data/dummyGateway');
 const { DUMMY_MEASURED } = require('../data/dummyMeasured');
 
+const Measured = require('../models/measured-model');
+
 const seederUser = require('../services/seeder/seeder-user');
 const seederRole = require('../services/seeder/seeder-role');
 const seederGateway = require('../services/seeder/seeder-gateway');
+
+const { getGateway } = require('../controllers/gateway-controller');
 
 const logger = require('../utils/logger');
 
@@ -71,4 +75,72 @@ const createDummyData = async () => {
   }
 };
 
-module.exports = createDummyData;
+const createCleverData = async (dateFrom, gatewayId) => {
+  const mongoUri = env.get('MONGO_URI_DOCKER').required().asUrlString();
+  const mongoDbName = env.get('DB_NAME').required().asString();
+
+  const client = new MongoClient(mongoUri);
+  
+  await client.connect();
+
+  const measuredCollection = client.db(mongoDbName).collection('measured');
+
+
+  dateFrom = new Date(dateFrom);
+
+  // getting the last 5-min timestamp prev to NOW
+  let dateTo = new Date();
+  let roundedMinutesTo = Math.floor(dateTo.getMinutes() / 5) * 5;
+  dateTo.setMinutes(roundedMinutesTo, 0, 0);
+  
+  // getting the first 5-min timesatmp past the parameter
+  let roundedMinutesFrom = Math.ceil(dateFrom.getMinutes() / 5) * 5;
+  dateFrom.setMinutes(roundedMinutesFrom, 0, 0);
+
+  // conversion to timestamps for easier work
+  let timestamp = dateFrom.getTime();
+  let finalTimestamp = dateTo.getTime();
+
+  // initial values for temperature and humidity
+  let temp = 23;
+  let hum = 53;
+
+  let gatewayForSeed = await getGateway(gatewayId);
+
+  while (timestamp <= finalTimestamp) {
+
+    let randomTemp = Math.random();
+    let randomHum = Math.random();
+
+    if (Math.abs(randomTemp - 0.5) < 0.2) {
+      temp += 0;
+    } else {
+      temp -= 0.1;
+    }
+
+    if (randomHum > 0.5) {
+      hum += 0.1;
+    } else {
+      hum -= 0.1;
+    }
+
+    await measuredCollection.insertOne(
+      new Measured({
+        temperature: temp.toFixed(2),
+        humidity: hum.toFixed(2),
+        time: new Date(timestamp),
+        gatewayId: gatewayForSeed,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      })
+    );
+
+    // adding five minutes
+    timestamp += 1000 * 60 * 5;
+  }
+}
+
+module.exports = {
+  createDummyData,
+  createCleverData
+};
