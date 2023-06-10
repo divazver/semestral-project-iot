@@ -135,10 +135,6 @@ const Navbar = ({navItems}) => {
                 display: 'flex',
                 alignItems: 'center',
               }}>
-                {isAdmin &&
-                <Button variant={'contained'} color={'primary'} onClick={() => navigate('/gateway/add')} sx={{mr: 5}}>
-                  <AddIcon/> Add Gateway
-                </Button>}
                 <LoggedUserInfo user={user}/>
               </Box>
             ) : ""}

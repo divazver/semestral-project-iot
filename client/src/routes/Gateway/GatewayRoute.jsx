@@ -42,7 +42,8 @@ const GatewayRoute = () => {
   const changeRangeValue = (key, value) => {
     let tempRange = {from, to};
     tempRange[key] = value;
-    setGranularity(getFirstAvailableGranularity());
+
+    setGranularity(getFirstAvailableGranularity(tempRange.to, tempRange.from));
     setDateRange(tempRange);
   }
 
@@ -59,7 +60,6 @@ const GatewayRoute = () => {
     .then((response) => {
       if (response?.data) {
         setGateway(response?.data);
-        console.log(from, to, currentRoundedTime);
         loadGatewayMeasurements(response?.data?._id, from, to);
       }
     })

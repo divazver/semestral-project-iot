@@ -33,7 +33,15 @@ const Dashboard = () => {
           }
         }
       })
-      .catch((error) => console.log(error))
+      .catch((error) => {
+        let tempGateways = [...gateways];
+        let index = tempGateways.findIndex((gateway) => gateway._id === gatewayId);
+        tempGateways[index].loaded = true;
+        tempGateways[index].measurements = [];
+        setGateways(tempGateways);
+
+        console.log(error);
+      })
       .finally(() => setLoadingMetaData(false));
 
   const getGateways = () => getAllGateways()
@@ -65,7 +73,7 @@ const Dashboard = () => {
   useEffect(() => {
     setPageTitle('Dashboard');
     getGateways();
-    console.log("doooooo");
+
     const interval = setInterval(() => {
       setLoadingMetaData(true);
       getGateways();

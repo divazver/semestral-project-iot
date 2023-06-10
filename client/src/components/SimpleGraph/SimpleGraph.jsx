@@ -11,6 +11,7 @@ import {
   Legend,
 } from 'chart.js';
 import {Line} from 'react-chartjs-2';
+import {Box} from '@mui/material';
 import {GRANULARITY_TO_TIME} from "../../utils/constants";
 
 ChartJS.register(
@@ -29,8 +30,8 @@ const SimpleGraph = ({measurements, label, accessor, color}) => {
   )];
 
   const values = measurements.map((measurement) => measurement[accessor]);
-  const minValue = Math.floor(Math.min.apply(null, values));
-  const maxValue = Math.ceil(Math.max.apply(null, values));
+  const minValue = Math.floor(Math.min.apply(null, values)) - .5;
+  const maxValue = Math.ceil(Math.max.apply(null, values)) + .5;
 
   const options = {
     responsive: true,
@@ -72,7 +73,18 @@ const SimpleGraph = ({measurements, label, accessor, color}) => {
     ],
   }
 
-  return <Line options={options} data={data}/>;
+  return <Box sx={{position: 'relative'}}>
+    <Line options={options} data={data}/>
+    {values.length === 0 && <Box sx={{
+      position: 'absolute',
+      top: '50%',
+      right: '50%',
+      transform: 'translate3d(50%, -50%, 0)',
+      color: (theme) => theme.palette.grey[600],
+    }}>
+      Empty data set.
+    </Box>}
+  </Box>;
 }
 
 export default SimpleGraph;

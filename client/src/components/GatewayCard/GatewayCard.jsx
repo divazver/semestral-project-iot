@@ -109,7 +109,7 @@ const GatewayCard = ({loaded, gateway}) => {
           {!loaded ? <Skeleton variant="text" sx={{fontSize: '.75rem'}}/> : time ?
             <UpdateTime time={time}/> : <Typography variant={'body2'} sx={{
               color: (theme) => theme.palette.grey[600],
-            }}>Time is unavailable</Typography>}
+            }}>Data is unavailable</Typography>}
           <Typography variant={'h5'}>{gateway?.name}</Typography>
         </Box>
         <GatewayPinButton gatewayId={gateway?._id}/>
