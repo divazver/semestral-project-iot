@@ -9,6 +9,11 @@ const navItems = [
     path: '/dashboard',
     logged: true,
   },
+  {
+    name: 'Gateways',
+    path: '/gateways',
+    logged: true,
+  },
 ];
 
 const Page = () => (<>
