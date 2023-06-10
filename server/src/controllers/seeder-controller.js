@@ -102,23 +102,27 @@ const createCleverData = async (dateFrom, gatewayId) => {
   let finalTimestamp = dateTo.getTime();
 
   // initial values for temperature and humidity
-  let temp = 23;
-  let hum = 53;
+  let temp = 24;
+  let hum = 55;
 
   let gatewayForSeed = await getGateway(gatewayId);
 
   while (timestamp <= finalTimestamp) {
 
-    let randomTemp = Math.random();
-    let randomHum = Math.random();
+    let randomTemp = Math.floor(Math.random() * (30 - 22 + 1)) + 22;
+    let randomHum = Math.floor(Math.random() * (58 - 42 + 1)) + 42;
 
-    if (Math.abs(randomTemp - 0.5) < 0.2) {
+    if (Math.abs(randomTemp - temp) < 2) {
       temp += 0;
+    } else if (randomTemp > temp) {
+      temp += 0.1;
     } else {
       temp -= 0.1;
     }
 
-    if (randomHum > 0.5) {
+    if (Math.abs(randomHum - hum) < 3) {
+      hum += 0;
+    } else if (randomHum > hum) {
       hum += 0.1;
     } else {
       hum -= 0.1;
