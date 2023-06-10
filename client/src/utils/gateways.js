@@ -24,10 +24,10 @@ export const mapGateways = (gateways, pinnedGateways) => {
     gateways?.forEach((gateway) => {
       let tempGateway = {...gateway};
       if (isGatewayPinned(tempGateway._id, pinnedGateways)) {
-        tempGateway.measurements = getGatewayLastMeasurements(tempGateway);
+        //tempGateway.measurements = getGatewayLastMeasurements(tempGateway);
         pinnedGatewaysTemp.push(tempGateway);
       } else {
-        tempGateway.measurements = getGatewayLastMeasurements(tempGateway);
+        //tempGateway.measurements = getGatewayLastMeasurements(tempGateway);
         gatewaysTemp.push(tempGateway);
       }
     });
